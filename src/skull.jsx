@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 const SkullModel = ({ matrix }) => {
-  const gltf = useGLTF('fyp_AR/public/skull_downloadable.glb'); 
+  const gltf = useGLTF('skull_downloadable.glb'); 
   const modelRef = useRef();
 
   useEffect(() => {
