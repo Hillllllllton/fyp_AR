@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 const SkullbotModel = ({ matrix, faceLandmark}) => {
   // const gltf = useGLTF('/skullbot.glb'); 
-  const gltf = useGLTF('public/new_skullbot.glb'); 
+  const gltf = useGLTF('fyp_AR/public/new_skullbot.glb'); 
   const modelRef = useRef();
   // console.log(gltf.scene.scale)
 
