@@ -65,7 +65,7 @@ function VideoMaterial({ videoRef  }) {
 
 
 function FullScreenPlane({videoRef}) {
-  const { viewport } = useThree();
+  // const { viewport } = useThree();
   const height = window.innerHeight;
   const width = (window.innerHeight*1280) / 720;
 
