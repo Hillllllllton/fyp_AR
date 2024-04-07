@@ -60,7 +60,7 @@ function FrameActions({ videoRef, isWebcamReady, setFaceLandmark, setModelMatrix
 function VideoMaterial({ videoRef  }) {
   const texture = useVideoTexture(videoRef.current.srcObject)
 
-  return <meshBasicMaterial map={texture} toneMapped={false} transparent opacity={0.4} />
+  return <meshBasicMaterial map={texture} toneMapped={false} />
 }
 
 
@@ -120,8 +120,8 @@ function App() {
     <div className="canvas-container">
       <VideoComponent videoRef={videoRef} setIsWebcamReady={setIsWebcamReady} />
         <Canvas >
-      <PerspectiveCamera manual fov={60} near={0.01} far={5000} aspect={aspectRatio} />
       <OrbitControls />
+      <PerspectiveCamera manual fov={60} near={0.01} far={5000} aspect={aspectRatio} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, 1, 0]} />
       <Suspense fallback={null}>
