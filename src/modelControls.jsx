@@ -9,6 +9,7 @@ export function useSkullControls() {
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetY: { value: 4, min: -10, max: 10, step: 0.1 },
     offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
+    opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   });
 }
 // Hook for import Model
@@ -20,6 +21,7 @@ export function useModelControls() {
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetY: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
+    opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   });
 }
 
