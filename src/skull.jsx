@@ -1,28 +1,27 @@
-import React, { useRef, useEffect } from 'react';
-import { useGLTF } from '@react-three/drei';
-import * as THREE from 'three';
+import React, { useRef, useEffect } from "react";
+import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
+import { useSkullControls } from "./modelControls";
 
 const SkullModel = ({ matrix }) => {
-  const gltf = useGLTF('skull_downloadable.glb'); 
+  const gltf = useGLTF("nospaceright.glb");
+  const { scaleX, scaleY, scaleZ, offsetX, offsetY, offsetZ } =
+    useSkullControls();
   const modelRef = useRef();
 
   useEffect(() => {
     if (matrix) {
-      let scale = 15;   //13.5 for skull
-      // Apply the transformation matrix directly to the model
-      let m = matrix.scale(new THREE.Vector3(scale, scale , scale));
-      // let m = matrix;
-      // console.log(matrix.elements);
+      const m = matrix.clone().scale(new THREE.Vector3(scaleX, scaleY, scaleZ));
+      m.setPosition(
+        m.elements[12] + offsetX,
+        m.elements[13] + offsetY,
+        m.elements[14] + offsetZ,
+      );
       gltf.scene.matrixAutoUpdate = false;
       gltf.scene.matrix.copy(m);
-    console.log(gltf.scene);
-      // gltf.scene.translateY(0).updateMatrix();
-      // gltf.scene.updateMatrixWorld(true);
     }
-  }, [matrix]); // Re-apply whenever the matrix changes
+  }, [matrix, scaleX, scaleY, scaleZ, offsetX, offsetY, offsetZ]);
 
   return <primitive object={gltf.scene} ref={modelRef} />;
 };
 export default SkullModel;
-
-

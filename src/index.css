@@ -1,8 +1,9 @@
-html, body {
+html,
+body {
   margin: 0;
-  height: 100%; /* Ensure that the full height of the page is used */
-  overflow: hidden; /* Optional: if you want to remove scrolling */
-  background-color:black;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
 }
 
 .canvas-container {
@@ -10,8 +11,53 @@ html, body {
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-  height: 80vh; /* This will make the container take up the full viewport height */
+  height: 80vh;
   margin: 0 auto;
   padding: 2em;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.control-button {
+  background-color: #2a2d38;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+}
+
+.control-button:hover {
+  background-color: #191c20;
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-input + label {
+  background-color: #2a2d38;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.file-input:focus + label,
+.file-input + label:hover {
+  background-color: #191c20;
+}
