@@ -9,19 +9,28 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { FilesetResolver, FaceLandmarker } from "@mediapipe/tasks-vision";
-
+import { useControls } from "leva";
 import SkullModel from "./skull";
 import SkullbotModel from "./skullbot";
 import ModelLoader from "./ModelLoader";
 import FileInput from "./FileInput";
 
 const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
+  const { facingMode } = useControls({
+    facingMode: {
+      value: "user",
+      options: {
+        Front: "user",
+        Back: "environment",
+      },
+    },
+  });
   useEffect(() => {
     async function setupWebcam() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: "user",
+            facingMode: facingMode,
             width: window.innerWidth,
             height: window.innerHeight,
           },
@@ -39,7 +48,7 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
     }
 
     setupWebcam();
-  }, [videoRef, setIsWebcamReady]);
+  }, [videoRef, setIsWebcamReady, facingMode]);
 
   return (
     <video

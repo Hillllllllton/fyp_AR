@@ -20,7 +20,7 @@ function FileInput({ onFileSelect }) {
         style={{ display: "none" }} // hides the input
       />
       <label htmlFor="file" className="file-input-label">
-        Choose a file
+        Choose a .glb file
       </label>
     </>
   );
