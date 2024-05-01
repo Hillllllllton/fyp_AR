@@ -59,7 +59,6 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
       style={{ display: "none" }}
     />
   );
-  // return <video ref={videoRef} autoPlay playsInline id="video" />;
 };
 
 function FrameActions({
@@ -112,7 +111,6 @@ function FullScreenPlane({ videoRef }) {
 }
 
 function App() {
-  // const videoRef = useRef<HTMLVideoElement>(null);
   const videoRef = useRef(null);
   const [isWebcamReady, setIsWebcamReady] = useState(false);
   const [faceLandmarker, setFaceLandmarker] = useState(null);

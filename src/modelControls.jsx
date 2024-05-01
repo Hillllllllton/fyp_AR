@@ -28,7 +28,7 @@ export function useModelControls() {
 // Hook for Skullbot Model
 export function useSkullbotControls() {
   return useControls("Skullbot", {
-    landmarkIndex: { value: 9, min: 0, max: 467, step: 1 },
+    landmarkIndex: { value: 9, min: 0, max: 478, step: 1 },
     scale: { value: 0.1, min: 0.01, max: 1, step: 0.01 },
   });
 }
