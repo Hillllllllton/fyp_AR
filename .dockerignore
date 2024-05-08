@@ -1,0 +1,8 @@
+.dockerignore
+node_modules
+RRADME.md 
+.git*
+brainy.glb
+neuro.glb
+skull_downloadable.glb
+
