@@ -180,7 +180,9 @@ function App() {
             {selectedFile && (
               <ModelLoader file={selectedFile} matrix={modelMatrix} />
             )}
-            {modelMatrix && skullVisible && <SkullModel matrix={modelMatrix} />}
+            {modelMatrix && skullVisible && (
+              <SkullModel matrix={modelMatrix} faceLandmark={faceLandmark} />
+            )}
             {modelMatrix && skullbotVisible && (
               <SkullbotModel matrix={modelMatrix} faceLandmark={faceLandmark} />
             )}
