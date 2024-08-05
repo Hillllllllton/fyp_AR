@@ -61,3 +61,8 @@ body {
 .file-input + label:hover {
   background-color: #191c20;
 }
+
+#segmentationCanvas {
+  pointer-events: none; /* Ensures canvas does not intercept mouse events */
+  mix-blend-mode: multiply; /* Optional blend mode for better visualization */
+}
