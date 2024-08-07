@@ -162,7 +162,6 @@ function FrameActions({
             // data[j + 1] = 0; // Green
             // data[j + 2] = 0; // Blue
             // data[j + 3] = 150; // Alpha
-            //
 
             const x = i % canvasRef.current.width;
             const y = Math.floor(i / canvasRef.current.width);
@@ -186,6 +185,9 @@ function FrameActions({
           Width,
           Height,
         });
+        console.log("width", Width);
+        console.log("height", Height);
+
         setFaceWidth(Width);
         setFaceHeight(Height);
 
@@ -291,6 +293,12 @@ export default function App() {
         <FileInput className="choose-button" onFileSelect={setSelectedFile} />
       </div>
       <div className="canvas-container">
+        <canvas
+          ref={canvasRef}
+          width={videoRef.current?.videoWidth || 640}
+          height={videoRef.current?.videoHeight || 480}
+          style={{ position: "absolute", top: 0, left: 0 }}
+        />
         <VideoComponent
           videoRef={videoRef}
           setIsWebcamReady={setIsWebcamReady}
@@ -337,12 +345,6 @@ export default function App() {
             />
           </Suspense>
         </Canvas>
-        <canvas
-          ref={canvasRef}
-          width={videoRef.current?.videoWidth || 640}
-          height={videoRef.current?.videoHeight || 480}
-          style={{ position: "absolute", top: 0, left: 0 }}
-        />
       </div>
     </div>
   );
