@@ -75,28 +75,10 @@ function FrameActions({
   canvasRef,
   setFaceWidth,
   setFaceHeight,
+  isResizing,
 }) {
-  const resizeTimeoutRef = useRef(null);
-  const [isResizing, setIsResizing] = useState(true);
-
-  // Start resizing when the component is mounted
-  useEffect(() => {
-    if (isWebcamReady) {
-      // Start resizing for 10 seconds
-      resizeTimeoutRef.current = setTimeout(() => {
-        setIsResizing(false); // Stop resizing after 10 seconds
-      }, 5000); // 10,000 ms = 10 seconds
-    }
-
-    // Clear timeout if the component unmounts
-    return () => {
-      if (resizeTimeoutRef.current) {
-        clearTimeout(resizeTimeoutRef.current);
-      }
-    };
-  }, [isWebcamReady]);
-
   useFrame(() => {
+    // console.log("isResizing", isResizing);
     if (isWebcamReady && faceLandmarker && videoRef.current) {
       try {
         const results = faceLandmarker.detectForVideo(
@@ -148,9 +130,12 @@ function FrameActions({
           minY = canvasRef.current.height;
         let maxX = 0,
           maxY = 0;
+        // console.log("canvasRef.current.width", canvasRef.current.width);
+        // console.log("canvasRef.current.height", canvasRef.current.height);
 
         // Adjust the color for face-skin category (index 3)
         const faceSkinCategory = 3;
+        // console.log("maskData", maskData.length);
 
         for (let i = 0; i < maskData.length; i++) {
           const j = i * 4;
@@ -179,30 +164,15 @@ function FrameActions({
         // Calculate the bounding box dimensions
         const Width = maxX - minX;
         const Height = maxY - minY;
-        console.log("Face bounding box:", {
-          minX,
-          minY,
-          Width,
-          Height,
-        });
-        console.log("width", Width);
-        console.log("height", Height);
-
         setFaceWidth(Width);
         setFaceHeight(Height);
 
-        // Use these dimensions to resize your skull model accordingly
-        // const scaleFactor = faceWidth / faceHeight; // Example scaling factor
-        // setSkullScale(scaleFactor);
-
-        // Close the MPMask instance
         mask.close();
-        return Width, Height;
       }
     }
   });
 
-  return null; // No need to return canvas here
+  return null;
 }
 
 // VideoMaterial for rendering video texture
@@ -216,6 +186,8 @@ function VideoMaterial({ videoRef }) {
 function FullScreenPlane({ videoRef }) {
   const height = window.innerHeight;
   const width = (window.innerHeight * 1280) / 720;
+  console.log("width", width);
+  console.log("height", height);
 
   return (
     <Plane args={[width, height]} position={[0, 0, -750]}>
@@ -238,8 +210,7 @@ export default function App() {
   const aspectRatio = width / window.innerHeight;
   const [faceWidth, setFaceWidth] = useState(0);
   const [faceHeight, setFaceHeight] = useState(0);
-  const [showOverlay, setShowOverlay] = useState(true);
-
+  const [isResizing, setIsResizing] = useState(false);
   useEffect(() => {
     async function initMediaPipe() {
       const vision = await FilesetResolver.forVisionTasks(
@@ -271,7 +242,6 @@ export default function App() {
 
       console.log("Image Segmenter is ready");
     }
-
     initMediaPipe();
   }, []);
 
@@ -282,7 +252,7 @@ export default function App() {
           className="control-button"
           onClick={() => setSkullVisible(!skullVisible)}
         >
-          {skullVisible ? "Hide Skull" : "Show Skull"}
+          {skullVisible ? "Hide Model" : "Show Model"}
         </button>
         <button
           className="control-button"
@@ -291,13 +261,19 @@ export default function App() {
           {skullbotVisible ? "Hide Skullbot" : "Show Skullbot"}
         </button>
         <FileInput className="choose-button" onFileSelect={setSelectedFile} />
+        <button
+          className="control-button"
+          onClick={() => setIsResizing(!isResizing)}
+        >
+          {isResizing ? "Auto Resing: On" : "Auto Resing: Off"}
+        </button>
       </div>
       <div className="canvas-container">
         <canvas
           ref={canvasRef}
           width={videoRef.current?.videoWidth || 640}
           height={videoRef.current?.videoHeight || 480}
-          style={{ position: "absolute", top: 0, left: 0 }}
+          style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
         />
         <VideoComponent
           videoRef={videoRef}
@@ -324,6 +300,7 @@ export default function App() {
                 matrix={modelMatrix}
                 faceWidth={faceWidth}
                 faceHeight={faceHeight}
+                isResizing={isResizing}
               /> // Pass scale prop
             )}
             {modelMatrix && skullbotVisible && (
@@ -342,6 +319,7 @@ export default function App() {
               canvasRef={canvasRef}
               setFaceWidth={setFaceWidth}
               setFaceHeight={setFaceHeight}
+              isResizing={isResizing}
             />
           </Suspense>
         </Canvas>

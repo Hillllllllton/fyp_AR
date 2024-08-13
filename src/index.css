@@ -14,6 +14,7 @@ body {
   height: 80vh;
   margin: 0 auto;
   padding: 2em;
+  position: relative;
 }
 
 .button-container {
@@ -44,7 +45,6 @@ body {
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  z-index: -1;
 }
 
 .file-input + label {
@@ -60,9 +60,4 @@ body {
 .file-input:focus + label,
 .file-input + label:hover {
   background-color: #191c20;
-}
-
-#segmentationCanvas {
-  pointer-events: none; /* Ensures canvas does not intercept mouse events */
-  mix-blend-mode: multiply; /* Optional blend mode for better visualization */
 }
