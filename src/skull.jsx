@@ -3,19 +3,19 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useSkullControls } from "./modelControls";
 
-const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
+const SkullModel = ({ matrix, faceWidth, faceHeight }) => {
   const { scene, materials } = useGLTF("nospaceright.glb");
   const { scaleX, scaleY, scaleZ, offsetX, offsetY, offsetZ, opacity } =
     useSkullControls();
   const modelRef = useRef();
-  const initialX = 13.5;
-  const initialY = 13.5;
-  const initialZ = 13.5;
+  const initialX = 18,
+    initialY = 18,
+    initialZ = 18;
 
   useEffect(() => {
     if (matrix) {
-      let baseScaleX = faceWidth ? faceWidth / 28 : initialX;
-      let baseScaleY = faceHeight ? faceHeight / 40 : initialY;
+      let baseScaleX = faceWidth ? faceWidth / 100 : initialX;
+      let baseScaleY = faceHeight ? faceHeight / 5 : initialY;
       let baseScaleZ = initialZ;
 
       // Apply manual scaling on top of the base scale
@@ -32,7 +32,6 @@ const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
       );
       scene.matrixAutoUpdate = false;
       scene.matrix.copy(m);
-      // console log current scale
     }
   }, [matrix, scaleX, scaleY, scaleZ, offsetX, offsetY, faceWidth, faceHeight]);
 

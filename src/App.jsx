@@ -36,8 +36,10 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: facingMode,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            // width: window.innerWidth,
+            // height: window.innerHeight,
+            // width: videoRef.current.videoWidth,
+            // height: videoRef.current.videoHeight,
           },
         });
         if (videoRef.current) {
@@ -184,13 +186,16 @@ function VideoMaterial({ videoRef }) {
 
 // FullScreenPlane for displaying the video background
 function FullScreenPlane({ videoRef }) {
-  const height = window.innerHeight;
-  const width = (window.innerHeight * 1280) / 720;
+  // const height = window.innerHeight;
+  // const width = window.innerWidth;
+  // const width = (window.innerHeight * 1280) / 720;
+  const height = videoRef.current.videoHeight;
+  const width = videoRef.current.videoWidth;
   console.log("width", width);
   console.log("height", height);
 
   return (
-    <Plane args={[width, height]} position={[0, 0, -750]}>
+    <Plane args={[width, height]} position={[0, 0, -280]}>
       <VideoMaterial videoRef={videoRef} />
     </Plane>
   );
@@ -271,8 +276,10 @@ export default function App() {
       <div className="canvas-container">
         <canvas
           ref={canvasRef}
-          width={videoRef.current?.videoWidth || 640}
-          height={videoRef.current?.videoHeight || 480}
+          // width={videoRef.current?.videoWidth || 640}
+          // height={videoRef.current?.videoHeight || 480}
+          width={window.innerWidth}
+          height={window.innerHeight}
           style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
         />
         <VideoComponent
@@ -284,7 +291,7 @@ export default function App() {
           <OrbitControls />
           <PerspectiveCamera
             manual
-            fov={60}
+            fov={50}
             near={0.01}
             far={5000}
             aspect={aspectRatio}
@@ -300,7 +307,6 @@ export default function App() {
                 matrix={modelMatrix}
                 faceWidth={faceWidth}
                 faceHeight={faceHeight}
-                isResizing={isResizing}
               /> // Pass scale prop
             )}
             {modelMatrix && skullbotVisible && (
