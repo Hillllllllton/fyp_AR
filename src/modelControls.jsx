@@ -3,9 +3,9 @@ import { useControls } from "leva";
 // Hook for Skull Model
 export function useSkullControls() {
   return useControls("Default Model", {
-    scaleX: { value: 13.5, min: 0, max: 50, step: 0.1 },
-    scaleY: { value: 13.5, min: 0, max: 50, step: 0.1 },
-    scaleZ: { value: 13.5, min: 0, max: 50, step: 0.1 },
+    scaleX: { value: 1, min: 0, max: 2, step: 0.05 },
+    scaleY: { value: 1, min: 0, max: 2, step: 0.05 },
+    scaleZ: { value: 1, min: 0, max: 2, step: 0.05 },
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetY: { value: 4, min: -10, max: 10, step: 0.1 },
     offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
