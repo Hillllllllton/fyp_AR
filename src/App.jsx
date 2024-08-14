@@ -273,15 +273,15 @@ export default function App() {
           {isResizing ? "Auto Resing: On" : "Auto Resing: Off"}
         </button>
       </div>
+      <canvas
+        ref={canvasRef}
+        // width={videoRef.current?.videoWidth || 640}
+        // height={videoRef.current?.videoHeight || 480}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
+      />
       <div className="canvas-container">
-        <canvas
-          ref={canvasRef}
-          // width={videoRef.current?.videoWidth || 640}
-          // height={videoRef.current?.videoHeight || 480}
-          width={window.innerWidth}
-          height={window.innerHeight}
-          style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
-        />
         <VideoComponent
           videoRef={videoRef}
           setIsWebcamReady={setIsWebcamReady}
@@ -291,7 +291,7 @@ export default function App() {
           <OrbitControls />
           <PerspectiveCamera
             manual
-            fov={50}
+            fov={60}
             near={0.01}
             far={5000}
             aspect={aspectRatio}

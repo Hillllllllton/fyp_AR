@@ -7,7 +7,7 @@ export function useSkullControls() {
     scaleY: { value: 1, min: 0, max: 2, step: 0.05 },
     scaleZ: { value: 1, min: 0, max: 2, step: 0.05 },
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
-    offsetY: { value: 4, min: -10, max: 10, step: 0.1 },
+    offsetY: { value: 5, min: -10, max: 10, step: 0.1 },
     offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
     opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   });
