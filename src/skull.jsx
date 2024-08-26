@@ -17,6 +17,8 @@ const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
       let baseScaleX = faceWidth ? faceWidth / 28 : initialX;
       let baseScaleY = faceHeight ? faceHeight / 40 : initialY;
       let baseScaleZ = initialZ;
+      // console.log("faceWidth", faceWidth);
+      // console.log("faceHeight", faceHeight);
 
       // Apply manual scaling on top of the base scale
       const finalScaleX = baseScaleX * scaleX;

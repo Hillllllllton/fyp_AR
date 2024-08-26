@@ -164,6 +164,8 @@ function FrameActions({
         // Calculate the bounding box dimensions
         const Width = maxX - minX;
         const Height = maxY - minY;
+        console.log("Width", Width);
+        console.log("Height", Height);
         setFaceWidth(Width);
         setFaceHeight(Height);
 
@@ -186,8 +188,8 @@ function VideoMaterial({ videoRef }) {
 function FullScreenPlane({ videoRef }) {
   const height = window.innerHeight;
   const width = (window.innerHeight * 1280) / 720;
-  console.log("width", width);
-  console.log("height", height);
+  // console.log("width", width);
+  // console.log("height", height);
 
   return (
     <Plane args={[width, height]} position={[0, 0, -750]}>
