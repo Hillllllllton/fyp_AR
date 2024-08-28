@@ -14,10 +14,10 @@ const SkullModel = ({ matrix, faceWidth, faceHeight }) => {
 
   useEffect(() => {
     if (matrix) {
-      // let baseScaleX = faceWidth ? faceWidth / 100 : initialX; //for webcam
-      // let baseScaleY = faceHeight ? faceHeight / 5 : initialY; //for webcam
-      let baseScaleX = faceWidth ? faceWidth / 19 : initialX; //for webcam
-      let baseScaleY = faceHeight ? faceHeight / 16 : initialY; //for webcam
+      let baseScaleX = faceWidth ? faceWidth / 100 : initialX; //for webcam
+      let baseScaleY = faceHeight ? faceHeight / 4.5 : initialY; //for webcam
+      // let baseScaleX = faceWidth ? faceWidth / 19 : initialX; //for mobile
+      // let baseScaleY = faceHeight ? faceHeight / 16 : initialY; //for mobile
       let baseScaleZ = initialZ;
 
       // Apply manual scaling on top of the base scale
