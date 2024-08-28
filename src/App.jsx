@@ -130,8 +130,8 @@ function FrameActions({
           minY = canvasRef.current.height;
         let maxX = 0,
           maxY = 0;
-        // console.log("canvasRef.current.width", canvasRef.current.width);
-        // console.log("canvasRef.current.height", canvasRef.current.height);
+        console.log("canvasRef.current.width", canvasRef.current.width);
+        console.log("canvasRef.current.height", canvasRef.current.height);
 
         // Adjust the color for face-skin category (index 3)
         const faceSkinCategory = 3;
