@@ -143,10 +143,10 @@ function FrameActions({
 
           // Assuming 3 is the face-skin category
           if (category === faceSkinCategory) {
-            // data[j] = 255; // Red
-            // data[j + 1] = 0; // Green
-            // data[j + 2] = 0; // Blue
-            // data[j + 3] = 150; // Alpha
+            data[j] = 255; // Red
+            data[j + 1] = 0; // Green
+            data[j + 2] = 0; // Blue
+            data[j + 3] = 150; // Alpha
 
             const x = i % canvasRef.current.width;
             const y = Math.floor(i / canvasRef.current.width);
@@ -275,7 +275,7 @@ export default function App() {
           ref={canvasRef}
           width={videoRef.current?.videoWidth || 640}
           height={videoRef.current?.videoHeight || 480}
-          style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
+          style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
         />
         <VideoComponent
           videoRef={videoRef}
