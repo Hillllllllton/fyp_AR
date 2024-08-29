@@ -9,6 +9,7 @@ export function useSkullControls() {
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetY: { value: 4, min: -10, max: 10, step: 0.1 },
     offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
+    // offsetZ: { value: -750, min: -760, max: 770, step: 1 },
     opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   });
 }
@@ -20,7 +21,7 @@ export function useModelControls() {
     scaleZ: { value: 13.5, min: 0, max: 200, step: 0.2 },
     offsetX: { value: 0, min: -10, max: 10, step: 0.1 },
     offsetY: { value: 0, min: -10, max: 10, step: 0.1 },
-    offsetZ: { value: 0, min: -10, max: 10, step: 0.1 },
+    offsetZ: { value: -750, min: -760, max: -740, step: 1 },
     opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   });
 }

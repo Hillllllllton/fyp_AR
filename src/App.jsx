@@ -36,8 +36,10 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: facingMode,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            // width: window.innerWidth * 0.8,
+            // height: window.innerHeight * 0.8,
+            width: 1280,
+            height: 720,
           },
         });
         if (videoRef.current) {
@@ -79,6 +81,7 @@ function FrameActions({
 }) {
   useFrame(() => {
     // console.log("isResizing", isResizing);
+    console.log("videoRef.current", videoRef.current.height);
     if (isWebcamReady && faceLandmarker && videoRef.current) {
       try {
         const results = faceLandmarker.detectForVideo(
@@ -168,6 +171,8 @@ function FrameActions({
         console.log("Height", Height);
         setFaceWidth(Width);
         setFaceHeight(Height);
+        console.log("videoRef.current.height", videoRef.current.srcObject);
+        console.log("videoRef.current.width", videoRef.current.width);
 
         mask.close();
       }
@@ -186,8 +191,11 @@ function VideoMaterial({ videoRef }) {
 
 // FullScreenPlane for displaying the video background
 function FullScreenPlane({ videoRef }) {
-  const height = window.innerHeight;
-  const width = (window.innerHeight * 1280) / 720;
+  // const height = window.innerHeight;
+  const width = 1280;
+  // const width = (window.innerHeight * 1280) / 720;
+  // const width = window.innerWidth;
+  const height = 720;
   // console.log("width", width);
   // console.log("height", height);
 
@@ -273,8 +281,10 @@ export default function App() {
       <div className="canvas-container">
         <canvas
           ref={canvasRef}
-          width={videoRef.current?.videoWidth || 640}
-          height={videoRef.current?.videoHeight || 480}
+          // width={videoRef.current?.videoWidth || 640}
+          // height={videoRef.current?.videoHeight || 480}
+          width={1280}
+          height={720}
           style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
         />
         <VideoComponent

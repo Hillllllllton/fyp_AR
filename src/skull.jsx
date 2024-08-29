@@ -14,9 +14,16 @@ const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
 
   useEffect(() => {
     if (matrix) {
-      let baseScaleX = faceWidth ? faceWidth / 28 : initialX;
-      let baseScaleY = faceHeight ? faceHeight / 40 : initialY;
+      // let baseScaleX = faceWidth ? faceWidth / 28 : initialX;
+      // let baseScaleY = faceHeight ? faceHeight / 40 : initialY;
+      // console.log("innerWidth", window.innerWidth);
+      // console.log("innerHeight", window.innerHeight);
+
       let baseScaleZ = initialZ;
+      let saclefactorX = ((-750 / matrix.elements[14]) * 1280) / 1280;
+      let saclefactorY = ((-750 / 0.7 / matrix.elements[14]) * 720) / 720;
+      let baseScaleX = faceWidth ? faceWidth / saclefactorX : initialX;
+      let baseScaleY = faceHeight ? faceHeight / saclefactorY : initialY;
       // console.log("faceWidth", faceWidth);
       // console.log("faceHeight", faceHeight);
 
@@ -24,6 +31,8 @@ const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
       const finalScaleX = baseScaleX * scaleX;
       const finalScaleY = baseScaleY * scaleY;
       const finalScaleZ = baseScaleZ * scaleZ;
+      // console.log("finalScaleX", finalScaleX);
+      // console.log("finalScaleY", finalScaleY);
       const m = matrix
         .clone()
         .scale(new THREE.Vector3(finalScaleX, finalScaleY, finalScaleZ));
@@ -32,6 +41,9 @@ const SkullModel = ({ matrix, faceWidth, faceHeight, isResizing }) => {
         m.elements[13] + offsetY,
         m.elements[14] + offsetZ,
       );
+      // console.log("element X", m.elements[12]);
+      // console.log("element Y", m.elements[13]);
+      // console.log("element Z", m.elements[14]);
       scene.matrixAutoUpdate = false;
       scene.matrix.copy(m);
       // console log current scale
