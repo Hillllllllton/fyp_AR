@@ -36,10 +36,10 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: facingMode,
-            // width: window.innerWidth * 0.8,
-            // height: window.innerHeight * 0.8,
-            width: 1280,
-            height: 720,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            // width: 1280,
+            // height: 720,
           },
         });
         if (videoRef.current) {
@@ -48,6 +48,13 @@ const VideoComponent = ({ videoRef, setIsWebcamReady }) => {
             setIsWebcamReady(true); // Signal that webcam is ready
           };
         }
+        let stream_settings = stream.getVideoTracks()[0].getSettings();
+
+        let stream_width = stream_settings.width;
+        let stream_height = stream_settings.height;
+
+        console.log("webcamWidth: " + stream_width + "px");
+        console.log("webcamHeight: " + stream_height + "px");
       } catch (error) {
         console.error("Error accessing the webcam", error);
       }
@@ -133,8 +140,8 @@ function FrameActions({
           minY = canvasRef.current.height;
         let maxX = 0,
           maxY = 0;
-        console.log("canvasRef.current.width", canvasRef.current.width);
-        console.log("canvasRef.current.height", canvasRef.current.height);
+        // console.log("canvasRef.current.width", canvasRef.current.width);
+        // console.log("canvasRef.current.height", canvasRef.current.height);
 
         // Adjust the color for face-skin category (index 3)
         const faceSkinCategory = 3;
@@ -167,12 +174,12 @@ function FrameActions({
         // Calculate the bounding box dimensions
         const Width = maxX - minX;
         const Height = maxY - minY;
-        console.log("Width", Width);
-        console.log("Height", Height);
+        // console.log("Width", Width);
+        // console.log("Height", Height);
         setFaceWidth(Width);
         setFaceHeight(Height);
-        console.log("videoRef.current.height", videoRef.current.srcObject);
-        console.log("videoRef.current.width", videoRef.current.width);
+        // console.log("videoRef.current.height", videoRef.current.srcObject);
+        // console.log("videoRef.current.width", videoRef.current.width);
 
         mask.close();
       }
@@ -192,10 +199,10 @@ function VideoMaterial({ videoRef }) {
 // FullScreenPlane for displaying the video background
 function FullScreenPlane({ videoRef }) {
   // const height = window.innerHeight;
-  const width = 1280;
+  const width = 1790;
   // const width = (window.innerHeight * 1280) / 720;
   // const width = window.innerWidth;
-  const height = 720;
+  const height = 1028;
   // console.log("width", width);
   // console.log("height", height);
 
@@ -283,8 +290,8 @@ export default function App() {
           ref={canvasRef}
           // width={videoRef.current?.videoWidth || 640}
           // height={videoRef.current?.videoHeight || 480}
-          width={1280}
-          height={720}
+          width={1790}
+          height={1028}
           style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
         />
         <VideoComponent
